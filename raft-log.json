@@ -1,0 +1,5 @@
+[ {
+  "index" : 1,
+  "term" : 20,
+  "command" : "{\"jobId\":\"job-002\",\"type\":\"EMAIL\",\"payload\":\"Persistent Raft test\"}"
+} ]

@@ -1,0 +1,12 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+raft:
+  node-id: ${RAFT_NODE_ID:node-1}
+  peers: ${RAFT_PEERS:http://localhost:8081,http://localhost:8082}
