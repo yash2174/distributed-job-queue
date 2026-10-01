@@ -25,7 +25,7 @@ public class RaftJobController {
             @RequestBody RaftJobCommand command) {
 
         /*
-         * Only leader accepts writes.
+         Only leader accepts writes.
          */
         if (raftNode.getRole()
                 != RaftState.Role.LEADER) {

@@ -18,10 +18,9 @@ public class RaftHeartbeatScheduler {
     }
 
     /*
-     * Frequent leader communication.
-     *
-     * If followers are behind, the same mechanism also
-     * performs batch catch-up.
+      Frequent leader communication.
+     If followers are behind, the same mechanism also
+     performs batch catch-up.
      */
     @Scheduled(fixedRate = 100)
     public void sendHeartbeat() {

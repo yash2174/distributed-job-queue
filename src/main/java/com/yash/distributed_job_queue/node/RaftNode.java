@@ -56,10 +56,6 @@ public class RaftNode {
                         + state.getLastApplied());
     }
 
-    // ------------------------------------------------
-    // PERSIST RAFT STATE
-    // ------------------------------------------------
-
     private void persistState() {
 
         RaftMetadata metadata =
@@ -80,9 +76,6 @@ public class RaftNode {
         metadataStore.save(metadata);
     }
 
-    // ------------------------------------------------
-    // GETTERS
-    // ------------------------------------------------
 
     public synchronized String getNodeId() {
         return nodeId;
@@ -126,12 +119,7 @@ public class RaftNode {
         return log.get(log.size() - 1).getTerm();
     }
 
-    /*
-     * ------------------------------------------------
-     * ELECTION
-     * ------------------------------------------------
-     */
-
+  
     public synchronized void startElection() {
 
         state.setRole(
@@ -237,17 +225,11 @@ public class RaftNode {
                 >= myLastLogIndex;
     }
 
-    /*
-     * ------------------------------------------------
-     * APPEND ENTRIES
-     * ------------------------------------------------
-     */
+   
     public synchronized AppendEntriesResponse handleAppendEntries(
         AppendEntriesRequest request) {
 
-    /*
-     * Reject stale leader terms.
-     */
+   
     if (request.getTerm() < state.getCurrentTerm()) {
 
         return new AppendEntriesResponse(
@@ -258,10 +240,7 @@ public class RaftNode {
         );
     }
 
-    /*
-     * If the leader has a newer term,
-     * update our persistent Raft state.
-     */
+    
     if (request.getTerm() > state.getCurrentTerm()) {
 
         state.setCurrentTerm(request.getTerm());
@@ -270,23 +249,10 @@ public class RaftNode {
         persistState();
     }
 
-    /*
-     * Receiving AppendEntries from the current leader
-     * means we are a follower.
-     */
+   
     state.setRole(RaftState.Role.FOLLOWER);
 
-    /*
-     * Reset election timeout.
-     *
-     * This must happen whenever valid leader communication
-     * is received.
-     */
-    // Election timer is reset by RaftController.
-
-    /*
-     * Check previous log index.
-     */
+    
     if (request.getPrevLogIndex() > getLastLogIndex()) {
 
         int conflictIndex = getLastLogIndex() + 1;
@@ -299,9 +265,7 @@ public class RaftNode {
         );
     }
 
-    /*
-     * Check previous log term.
-     */
+    
     if (request.getPrevLogIndex() > 0) {
 
         RaftLogEntry previousEntry =
@@ -326,9 +290,7 @@ public class RaftNode {
         if (previousEntry.getTerm()
                 != request.getPrevLogTerm()) {
 
-            /*
-             * Find the first entry having this conflicting term.
-             */
+           
             int conflictTerm = previousEntry.getTerm();
 
             int conflictIndex = request.getPrevLogIndex();
@@ -355,12 +317,7 @@ public class RaftNode {
         }
     }
 
-    /*
-     * Append incoming entries.
-     *
-     * If an existing entry conflicts with the leader,
-     * remove our conflicting suffix and replace it.
-     */
+ 
     List<RaftLogEntry> incoming =
             request.getEntries();
 
@@ -422,12 +379,7 @@ public class RaftNode {
     );
 }
 
-    /*
-     * ------------------------------------------------
-     * LOG HELPERS
-     * ------------------------------------------------
-     */
-
+    
     private RaftLogEntry getLogEntry(
             int index) {
 
@@ -475,12 +427,7 @@ public class RaftNode {
         return getLogEntry(index);
     }
 
-    /*
-     * ------------------------------------------------
-     * COMMIT
-     * ------------------------------------------------
-     */
-
+    
     public synchronized void advanceCommitIndex(
             int index) {
 
@@ -500,11 +447,7 @@ public class RaftNode {
         }
     }
 
-    /*
-     * ------------------------------------------------
-     * APPLY
-     * ------------------------------------------------
-     */
+    
 
     public synchronized List<RaftLogEntry>
     getEntriesToApply() {
@@ -543,11 +486,6 @@ public class RaftNode {
         }
     }
 
-    /*
-     * ------------------------------------------------
-     * LEADER / FOLLOWER
-     * ------------------------------------------------
-     */
 
     public synchronized void becomeLeader() {
 

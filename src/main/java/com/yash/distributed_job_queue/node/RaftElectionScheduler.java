@@ -59,7 +59,7 @@ public class RaftElectionScheduler {
         electionTimer.reset();
 
         System.out.println(
-                "⏰ Election timeout for "
+                "Election timeout for "
                         + raftNode.getNodeId());
 
         try {

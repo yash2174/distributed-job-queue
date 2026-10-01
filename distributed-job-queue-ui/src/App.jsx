@@ -32,9 +32,9 @@ function App() {
 
   const [jobs, setJobs] = useState([]);
 
-  // -----------------------------
+  
   // Load cluster state
-  // -----------------------------
+
   const loadCluster = async () => {
     try {
       const result = await findLeader();
@@ -60,9 +60,9 @@ function App() {
     return () => clearInterval(interval);
   }, []);
 
-  // -----------------------------
+ 
   // Submit Job
-  // -----------------------------
+  
   const handleSubmitJob = async (e) => {
     e.preventDefault();
 
@@ -138,9 +138,8 @@ function App() {
     }
   };
 
-  // -----------------------------
   // Cluster statistics
-  // -----------------------------
+  
   const onlineNodes = nodes.filter((node) => node.online).length;
 
   const clusterHealthy =
@@ -157,9 +156,7 @@ function App() {
   const lastLogIndex =
     leader?.state?.lastLogIndex ?? "-";
 
-  // -----------------------------
-  // UI
-  // -----------------------------
+    // UI
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100">
 

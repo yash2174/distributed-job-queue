@@ -27,11 +27,11 @@ public class RaftPersistentLog {
         this.objectMapper = objectMapper;
 
         /*
-         * Every Raft node gets its own persistent directory.
-         *
-         * node-1 -> data/raft/node-1/raft-log.json
-         * node-2 -> data/raft/node-2/raft-log.json
-         * node-3 -> data/raft/node-3/raft-log.json
+         Every Raft node gets its own persistent directory.
+         
+          node-1 -> data/raft/node-1/raft-log.json
+         node-2 -> data/raft/node-2/raft-log.json
+          node-3 -> data/raft/node-3/raft-log.json
          */
         File directory =
                 new File(
@@ -54,12 +54,7 @@ public class RaftPersistentLog {
         load();
     }
 
-    /*
-     * ------------------------------------------------
-     * APPEND
-     * ------------------------------------------------
-     */
-
+    
     public synchronized void append(
             RaftLogEntry entry) {
 
@@ -80,11 +75,7 @@ public class RaftPersistentLog {
         persist();
     }
 
-    /*
-     * ------------------------------------------------
-     * REPLACE FROM INDEX
-     * ------------------------------------------------
-     */
+    
 
     public synchronized void replaceFrom(
             int index,
@@ -107,23 +98,13 @@ public class RaftPersistentLog {
         persist();
     }
 
-    /*
-     * ------------------------------------------------
-     * GET ALL
-     * ------------------------------------------------
-     */
-
+ 
     public synchronized List<RaftLogEntry>
     getAll() {
 
         return new ArrayList<>(entries);
     }
 
-    /*
-     * ------------------------------------------------
-     * GET ENTRY
-     * ------------------------------------------------
-     */
 
     public synchronized RaftLogEntry
     get(int index) {
@@ -139,11 +120,6 @@ public class RaftPersistentLog {
         return null;
     }
 
-    /*
-     * ------------------------------------------------
-     * LAST INDEX
-     * ------------------------------------------------
-     */
 
     public synchronized int lastIndex() {
 
@@ -157,11 +133,7 @@ public class RaftPersistentLog {
                 .getIndex();
     }
 
-    /*
-     * ------------------------------------------------
-     * CLEAR
-     * ------------------------------------------------
-     */
+    
 
     public synchronized void clear() {
 
@@ -170,11 +142,7 @@ public class RaftPersistentLog {
         persist();
     }
 
-    /*
-     * ------------------------------------------------
-     * PERSIST
-     * ------------------------------------------------
-     */
+    
 
     private void persist() {
 
@@ -194,12 +162,7 @@ public class RaftPersistentLog {
         }
     }
 
-    /*
-     * ------------------------------------------------
-     * LOAD
-     * ------------------------------------------------
-     */
-
+  
     private void load() {
 
         try {

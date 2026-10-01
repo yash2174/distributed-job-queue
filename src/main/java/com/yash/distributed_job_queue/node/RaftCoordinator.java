@@ -27,11 +27,9 @@ public class RaftCoordinator {
         this.electionTimer = electionTimer;
     }
 
-    /*
-     * ------------------------------------------------
-     * START ELECTION
-     * ------------------------------------------------
-     */
+    
+     // START ELECTION
+     
 
     public synchronized void startElection() {
 
@@ -134,14 +132,9 @@ public class RaftCoordinator {
         }
     }
 
-    /*
-     * ------------------------------------------------
-     * HEARTBEATS
-     * ------------------------------------------------
-     *
-     * Actual log replication/catch-up is handled
-     * by RaftReplicationService.
-     */
+    
+     // HEARTBEATS
+     
 
     public void sendHeartbeats() {
 
@@ -150,11 +143,9 @@ public class RaftCoordinator {
         // RaftReplicationService directly.
     }
 
-    /*
-     * ------------------------------------------------
-     * PEERS
-     * ------------------------------------------------
-     */
+  
+     // PEERS
+     
 
     private List<String> getPeers() {
 

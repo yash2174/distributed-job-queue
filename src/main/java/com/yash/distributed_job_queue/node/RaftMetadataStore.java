@@ -20,11 +20,10 @@ public class RaftMetadataStore {
         this.objectMapper = objectMapper;
 
         /*
-         * Every Raft node gets its own metadata file.
-         *
-         * node-1 -> data/raft/node-1/raft-metadata.json
-         * node-2 -> data/raft/node-2/raft-metadata.json
-         * node-3 -> data/raft/node-3/raft-metadata.json
+          Every Raft node gets its own metadata file.
+          node-1 -> data/raft/node-1/raft-metadata.json
+          node-2 -> data/raft/node-2/raft-metadata.json
+          node-3 -> data/raft/node-3/raft-metadata.json
          */
         File directory =
                 new File(
@@ -45,11 +44,9 @@ public class RaftMetadataStore {
                         "raft-metadata.json");
     }
 
-    /*
-     * ------------------------------------------------
-     * LOAD
-     * ------------------------------------------------
-     */
+    
+     // LOAD
+     
 
     public synchronized RaftMetadata load() {
 
@@ -91,11 +88,9 @@ public class RaftMetadataStore {
         }
     }
 
-    /*
-     * ------------------------------------------------
-     * SAVE
-     * ------------------------------------------------
-     */
+    
+     // SAVE
+     
 
     public synchronized void save(
             RaftMetadata metadata) {

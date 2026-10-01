@@ -77,12 +77,7 @@ public class RaftStateMachine {
                                 + " : "
                                 + e.getMessage());
 
-                /*
-                 * Do NOT mark lastApplied here.
-                 *
-                 * The entry must remain available
-                 * for another application attempt.
-                 */
+                
             }
         }
     }
